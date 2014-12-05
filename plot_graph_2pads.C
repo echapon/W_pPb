@@ -694,6 +694,7 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       tp->SetBorderSize(0);
       tp->SetTextFont(42);
       tp->SetTextSize(lTextSize*0.8);
+      tp->SetFillStyle(0);
       tp->Draw();
    }
 
@@ -794,8 +795,8 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       pad1->Draw();
    }
 
-   int iPos = 33;
-   CMS_lumi( pad1, iPeriod, iPos );
+   int iPos = (string(gbasename)=="gch") ? 11 : 33;
+   CMS_lumi( gPad, iPeriod, iPos );
 
    c1->cd();
    c1->Update();
@@ -1152,6 +1153,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       tp->SetBorderSize(0);
       tp->SetTextFont(42);
       tp->SetTextSize(lTextSize*0.8);
+      tp->SetFillStyle(0);
       tp->Draw();
    }
 
@@ -1252,8 +1254,8 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       pad1->Draw();
    }
 
-   int iPos = 33;
-   CMS_lumi( pad2, iPeriod, iPos );
+   int iPos = (string(gbasename)=="gch") ? 11 : 33;
+   CMS_lumi( c1, iPeriod, iPos );
 
    c1->cd();
    c1->Update();
