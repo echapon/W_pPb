@@ -32,6 +32,7 @@ float extraOverCmsTextSize  = 0.76;
 TString lumi_13TeV = "20.1 fb^{-1}";
 TString lumi_8TeV  = "19.7 fb^{-1}";
 TString lumi_7TeV  = "5.1 fb^{-1}";
+TString lumi_5TeV  = "pPb 34.6 nb^{-1}";
 
 bool drawLogo      = false;
 

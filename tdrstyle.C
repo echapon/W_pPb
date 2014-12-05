@@ -157,4 +157,5 @@ void setTDRStyle() {
 
   tdrStyle->cd();
 
+  cout << "This is TDR style" << endl;
 }
