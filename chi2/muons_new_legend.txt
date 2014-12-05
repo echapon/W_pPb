@@ -1,0 +1,16 @@
+label
+eta bins
+raw yields
+stat error
+theory (dummy)
+theory errors (dummy)
+eff MC truth
+error on eff
+SF
+error on SF
+dummy QCD eff
+QCD syst
+dummy eff
+MC closure test
+filter eff (pile-up)
+error on filter eff

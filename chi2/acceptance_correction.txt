@@ -1,0 +1,14 @@
+with reweighting
+
+boost plus
+W+                      W-
+[-2.4,-2]    8.42439427313137146e-01 8.53077378804861008e-01
+[2,2.4]      8.21950517217666321e-01 7.94068330696910407e-01
+
+boost moins
+             W+                      W-
+[-2.4,-2]    ? 8.06331935497284102e-01
+[2,2.4]      ? 7.96627571931122769e-01
+
+
+check effect of reweighting!!! seems to have a huge effect!!!

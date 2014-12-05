@@ -1,0 +1,8 @@
+inputs :
+- un fichier avec les TGraph (syst et stat) des 2 canaux séparés + matrices de
+covariance stat+syst+lumi.
+- un fichier avec les matrices de covariance th.
+
+outputs :
+- un fichier avec les tgraph combinés + matrices de covariance stat+syst+lumi
+- ET PAS un fichier avec les matrices de covariance combinées th, puisque ce sont les mêmes que pour chaque canal séparément...

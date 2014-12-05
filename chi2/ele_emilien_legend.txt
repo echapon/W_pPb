@@ -1,0 +1,20 @@
+label
+eta bins
+raw yields
+stat error
+theory (dummy)
+theory error (dummy)
+eff MC truth
+eff error
+SF
+SF error
+dummy eff
+Ecorr error
+dummy eff
+QCD syst
+dummy eff
+charge confusion
+filter eff (pile-up)
+error on filter eff
+0.3% luminosity difference between electron and muon
+error on this
