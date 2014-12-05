@@ -28,7 +28,7 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
    for (int i=NBINS-1; i>NBINS/2-1; i--)
       cout << " & $" << g1_syst->GetY()[i]/34.62 << "\\pm" << g1_stat->GetEY()[i]/34.62 << "\\pm" << g1_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
-   cout << "$e^-$";
+   cout << "$\\Pe^-$";
    for (int i=NBINS-1; i>NBINS/2-1; i--)
       cout << " & $" << g2_syst->GetY()[i]/34.62 << "\\pm" << g2_stat->GetEY()[i]/34.62 << "\\pm" << g2_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
@@ -53,7 +53,7 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
    for (int i=NBINS/2-1; i>=0; i--)
       cout << " & $" << g1_syst->GetY()[i]/34.62 << "\\pm" << g1_stat->GetEY()[i]/34.62 << "\\pm" << g1_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
-   cout << "$e^-$";
+   cout << "$\\Pe^-$";
    for (int i=NBINS/2-1; i>=0; i--)
       cout << " & $" << g2_syst->GetY()[i]/34.62 << "\\pm" << g2_stat->GetEY()[i]/34.62 << "\\pm" << g2_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
