@@ -22,7 +22,7 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
    cout << "\\resizebox{\\textwidth}{!}{" << endl;
    cout << "\\begin{tabular}{|l|ccccc|}" << endl;
    cout << "\\hline" << endl;
-   cout << "$\\frac{d\\sigma}{d\\eta} (\\eta)$ & $[-2.4,-2.0] *$ & $[-2.0,-1.5]$& $[-1.5,-1.0]$ & $[-1.0,-0.5]$ & $[-0.5,0]$\\\\" << endl;
+   cout << "$\\frac{d\\sigma}{d\\eta} (\\eta)$ & $[-2.4,-2.0] $ & $[-2.0,-1.5]$& $[-1.5,-1.0]$ & $[-1.0,-0.5]$ & $[-0.5,0]$\\\\" << endl;
    cout << "\\hline" << endl;
    cout << "$\\mu^-$";
    for (int i=NBINS-1; i>NBINS/2-1; i--)
@@ -48,7 +48,7 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
    cout << "\\hline" << endl;
    cout << "\\hline" << endl;
    cout << "\\hline" << endl;
-   cout << "$\\frac{d\\sigma}{d\\eta} (\\eta)$ &$[0,0.5]$ & $[0.5,1.0]$ & $[1.0,1.5]$ & $[1.5,2.0]$& $[2.0,2.4]*$ \\\\" << endl;
+   cout << "$\\frac{d\\sigma}{d\\eta} (\\eta)$ &$[0,0.5]$ & $[0.5,1.0]$ & $[1.0,1.5]$ & $[1.5,2.0]$& $[2.0,2.4]$ \\\\" << endl;
    cout << "$\\mu^-$";
    for (int i=NBINS/2-1; i>=0; i--)
       cout << " & $" << g1_syst->GetY()[i]/34.62 << "\\pm" << g1_stat->GetEY()[i]/34.62 << "\\pm" << g1_syst->GetEY()[i]/34.62 << "$";
