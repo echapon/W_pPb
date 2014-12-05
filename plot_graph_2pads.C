@@ -12,6 +12,10 @@
 #include <string>
 #include "lumierror.h"
 
+#include "CMS_lumi.C"
+writeExtraText = false;       // if extra text
+int iPeriod = 99;    // 1=7TeV, 2=8TeV, 3=7+8TeV, 7=7+8+13TeV, 99 = pPb
+
 using namespace std;
 
 EColor gMyColor = kBlack;
@@ -633,25 +637,6 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       galice_stat->Draw("PZ");
    }
 
-   TPaveText *tcms = new TPaveText(gPad->GetLeftMargin(),1.-gPad->GetTopMargin()-0.015,0.3,0.99,"NDC");
-   tcms->AddText("CMS pPb 34.6 nb^{-1}");
-   tcms->SetFillColor(0);
-   tcms->SetFillStyle(0);
-   tcms->SetBorderSize(0);
-   tcms->SetTextFont(42);
-   tcms->SetTextSize(lTextSize*0.8);
-   tcms->SetTextAlign(11);
-   tcms->Draw();
-   TPaveText *tlumi = new TPaveText(0.5,1.-gPad->GetTopMargin()-0.015,1.-gPad->GetRightMargin()+0.015,0.99,"NDC");
-   tlumi->AddText("#sqrt{s_{NN}} = 5.02 TeV");
-   tlumi->SetFillColor(0);
-   tlumi->SetFillStyle(0);
-   tlumi->SetBorderSize(0);
-   tlumi->SetTextFont(42);
-   tlumi->SetTextSize(lTextSize*0.8);
-   tlumi->SetTextAlign(31);
-   tlumi->Draw();
-
    double xl=0.4,yl=0.18,dx=0.3,dy=0.15;
    if (string(gbasename)=="gA1m" || string(gbasename)=="gA1p" || string(gbasename)=="gA3" || string(gbasename)=="gA4")
    {
@@ -809,8 +794,14 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       pad1->Draw();
    }
 
+   int iPos = 33;
+   CMS_lumi( pad1, iPeriod, iPos );
 
    c1->cd();
+   c1->Update();
+   c1->RedrawAxis();
+   pad1->RedrawAxis();
+   pad2->RedrawAxis();
 
    gPad->SaveAs(Form("%s.pdf",gbasename));
    gPad->SaveAs(Form("%s.png",gbasename));
@@ -1108,25 +1099,6 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       galice_stat->Draw("PZ");
    }
 
-   TPaveText *tcms = new TPaveText(gPad->GetLeftMargin(),1.-gPad->GetTopMargin()-0.015,0.3,0.99,"NDC");
-   tcms->AddText("CMS pPb 34.6 nb^{-1}");
-   tcms->SetFillColor(0);
-   tcms->SetFillStyle(0);
-   tcms->SetBorderSize(0);
-   tcms->SetTextFont(42);
-   tcms->SetTextSize(lTextSize*0.8);
-   tcms->SetTextAlign(11);
-   tcms->Draw();
-   TPaveText *tlumi = new TPaveText(0.5,1.-gPad->GetTopMargin()-0.015,1.-gPad->GetRightMargin()+0.015,0.99,"NDC");
-   tlumi->AddText("#sqrt{s_{NN}} = 5.02 TeV");
-   tlumi->SetFillColor(0);
-   tlumi->SetFillStyle(0);
-   tlumi->SetBorderSize(0);
-   tlumi->SetTextFont(42);
-   tlumi->SetTextSize(lTextSize*0.8);
-   tlumi->SetTextAlign(31);
-   tlumi->Draw();
-
    double xl=0.5,yl=0.18,dx=0.3,dy=0.15;
    if (string(gbasename)=="gA1m" || string(gbasename)=="gA1p" || string(gbasename)=="gA3" || string(gbasename)=="gA4")
    {
@@ -1280,8 +1252,11 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       pad1->Draw();
    }
 
+   int iPos = 33;
+   CMS_lumi( pad2, iPeriod, iPos );
 
    c1->cd();
+   c1->Update();
 
    gPad->SaveAs(Form("%s.pdf",gbasename));
    gPad->SaveAs(Form("%s.png",gbasename));
