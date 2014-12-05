@@ -35,18 +35,18 @@ const char *channeltext_m = "W^{-} #rightarrow #font[12]{l}^{-} + #nu";
 // const char *channeltext = "W #rightarrow e + #nu";
 // const char *channeltext_p = "w^{+} #rightarrow e^{+} + #nu";
 // const char *channeltext_m = "w^{-} #rightarrow e^{-} + #nu";
-// const char *channeltext1 = "W #rightarrow #mu + #nu";
-// const char *channeltext1_p = "W^{+} #rightarrow #mu^{+} + #nu";
-// const char *channeltext1_m = "W^{-} #rightarrow #mu^{-} + #nu";
-const char *channeltext1 = "W #rightarrow #mu + #nu (0-10%)";
-const char *channeltext1_p = "W^{+} #rightarrow #mu^{+} + #nu (0-10%)";
-const char *channeltext1_m = "W^{-} #rightarrow #mu^{-} + #nu (0-10%)";
-// const char *channeltext2 = "W #rightarrow e + #nu";
-// const char *channeltext2_p = "W^{+} #rightarrow e^{+} + #nu";
-// const char *channeltext2_m = "W^{-} #rightarrow e^{-} + #nu";
-const char *channeltext2 = "W #rightarrow #mu + #nu (10-40%)";
-const char *channeltext2_p = "W^{+} #rightarrow #mu^{+} + #nu (10-40%)";
-const char *channeltext2_m = "W^{-} #rightarrow #mu^{-} + #nu (10-40%)";
+const char *channeltext1 = "W #rightarrow #mu + #nu";
+const char *channeltext1_p = "W^{+} #rightarrow #mu^{+} + #nu";
+const char *channeltext1_m = "W^{-} #rightarrow #mu^{-} + #nu";
+// const char *channeltext1 = "W #rightarrow  + #font[12]{l}#nu (new)";
+// const char *channeltext1_p = "W^{+} #rightarrow #font[12]{l}^{+} + #nu (new)";
+// const char *channeltext1_m = "W^{-} #rightarrow #font[12]{l}^{-} + #nu (new)";
+const char *channeltext2 = "W #rightarrow e + #nu";
+const char *channeltext2_p = "W^{+} #rightarrow e^{+} + #nu";
+const char *channeltext2_m = "W^{-} #rightarrow e^{-} + #nu";
+// const char *channeltext2 = "W #rightarrow  + #font[12]{l}#nu (old)";
+// const char *channeltext2_p = "W^{+} #rightarrow #font[12]{l}^{+} + #nu (old)";
+// const char *channeltext2_m = "W^{-} #rightarrow #font[12]{l}^{-} + #nu (old)";
 const char *channeltext3 = "W #rightarrow #mu + #nu (40-100%)";
 const char *channeltext3_p = "W^{+} #rightarrow #mu^{+} + #nu (40-100%)";
 const char *channeltext3_m = "W^{-} #rightarrow #mu^{-} + #nu (40-100%)";
@@ -829,7 +829,7 @@ void plot_graph_1file_all(const char* filename, int chan, bool reverse_eta=true,
    plot_graph_1file(filename,"gyieldsm",chan,reverse_eta,scale);
 }
 
-void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph.root", const char *gbasename="gyields", bool reverteta=false, double scale=1.)
+void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph.root", const char *gbasename="gyields", bool reverteta=false, double scale=1., bool threegraphs=false)
 {
    gStyle->SetOptTitle(0);
    gStyle->SetEndErrorSize(6);
@@ -890,7 +890,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
    if (string(gbasename)=="gyieldsp" || string(gbasename)=="gyieldsm")
    {
       ymin = 0.;
-      ymax = 80.;
+      ymax = 140.;
       if (string(gbasename)=="gyieldsp") ylabel = string("d#sigma (W^{+}#rightarrow#font[12]{l}^{+}#nu) / d#eta_{lab} [nb]");
       else ylabel = string("d#sigma (W^{-}#rightarrow#font[12]{l}^{-}#nu) / d#eta_{lab} [nb]");
    }
@@ -927,15 +927,15 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
 
    TString gname_stat1 = Form("%s_exp_statonly_%i",gbasename,channel_number);
    TString gname_syst1 = Form("%s_exp_%i",gbasename,channel_number);
-   TString gname_stat2 = Form("%s_exp_statonly_%i",gbasename,2);
-   TString gname_syst2 = Form("%s_exp_%i",gbasename,2);
+   TString gname_stat2 = Form("%s_exp_statonly_%i",gbasename,threegraphs ? 2 : channel_number);
+   TString gname_syst2 = Form("%s_exp_%i",gbasename,threegraphs ? 2 : channel_number);
 
    TGraphErrors *gexp_stat1 = (TGraphErrors*) f1->Get(gname_stat1);
    TGraphErrors *gexp_syst1 = (TGraphErrors*) f1->Get(gname_syst1);
-   TGraphErrors *gexp_stat2 = (TGraphErrors*) f1->Get(gname_stat2);
-   TGraphErrors *gexp_syst2 = (TGraphErrors*) f1->Get(gname_syst2);
-   TGraphErrors *gexp_stat3 = (TGraphErrors*) f2->Get(gname_stat2);
-   TGraphErrors *gexp_syst3 = (TGraphErrors*) f2->Get(gname_syst2);
+   TGraphErrors *gexp_stat2 = (TGraphErrors*) f2->Get(gname_stat2);
+   TGraphErrors *gexp_syst2 = (TGraphErrors*) f2->Get(gname_syst2);
+   TGraphErrors *gexp_stat3 = (TGraphErrors*) f1->Get(gname_stat2);
+   TGraphErrors *gexp_syst3 = (TGraphErrors*) f1->Get(gname_syst2);
    TGraphErrors *galice_stat = (string(gbasename)=="gyieldsp") ? data_alice_plus_stat() : data_alice_minus_stat();
    TGraphErrors *galice_syst = (string(gbasename)=="gyieldsp") ? data_alice_plus_syst() : data_alice_minus_syst();
    // TFile *fc = new TFile("combo_muacc_20140219.root");
@@ -1083,13 +1083,13 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       gexp_syst3->SetMarkerStyle(34);
       gexp_syst3->SetFillStyle(0);
       gexp_syst3->SetLineWidth(2);
-      gexp_syst3->Draw("||");
+      if (threegraphs) gexp_syst3->Draw("||");
 
       gexp_stat3->SetLineColor(kGreen);
       gexp_stat3->SetMarkerColor(kGreen);
       gexp_stat3->SetMarkerStyle(34);
       gexp_stat3->SetLineWidth(2);
-      gexp_stat3->Draw("PZ");
+      if (threegraphs) gexp_stat3->Draw("PZ");
    }
 
    if (doAlice)
@@ -1156,7 +1156,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       if (string(gbasename)=="gyieldsp" || string(gbasename)=="gA1p") legend3 = string(channeltext3_p);
       else if (string(gbasename)=="gyieldsm" || string(gbasename)=="gA1m") legend3 = string(channeltext3_m);
       tleg2->AddEntry(gexp_syst2,legend2.c_str(),"p");
-      tleg2->AddEntry(gexp_syst3,legend3.c_str(),"p");
+      if (threegraphs) tleg2->AddEntry(gexp_syst3,legend3.c_str(),"p");
    }
    else
    {
