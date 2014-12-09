@@ -31,6 +31,9 @@ int gMyMarker2 = 21;
 
 bool doAlice = false;
 
+// if true, the "syst" graph contains stat + syst errors
+bool statsyst = true;
+
 float gTextSize = 0.05;
 
 const char *channeltext = "W #rightarrow #font[12]{l} + #nu";
@@ -60,9 +63,39 @@ double acc_alice_plus_err[2] = {0.0035,0.0174};
 double acc_alice_minus[2] = {1.4495,1.7864};
 double acc_alice_minus_err[2] = {0.0063,0.0109};
 
-void toto(const char* tut)
+TGraphErrors* addErrors(TGraphErrors *gr1, TGraphErrors *gr2)
 {
-   cout << tut << endl;
+   int n1 = gr1->GetN();
+   int n2 = gr2->GetN();
+   if (n1 != n2)
+   {
+      cout << "addErrors: number of points don't match" << endl;
+      return NULL;
+   }
+
+   double *x1 = gr1->GetX();
+   double *ex1 = gr1->GetEX();
+   double *y1 = gr1->GetY();
+   double *ey1 = gr1->GetEY();
+   double *x2 = gr2->GetX();
+   double *ex2 = gr2->GetEX();
+   double *y2 = gr2->GetY();
+   double *ey2 = gr2->GetEY();
+
+   for (int i=0; i<n1; i++)
+   {
+      if (x1[i] != x2[i] || y1[i] != y2[i])
+      {
+         cout << x1[i] << " " << x2[i] << " " << y1[i] << " " << y2[i] << endl;
+         cout << "addErrors: inconsistent input" << endl;
+         return NULL;
+      }
+      ey1[i] = sqrt(ey1[i]*ey1[i] + ey2[i]*ey2[i]);
+   }
+
+   TGraphErrors *result = new TGraphErrors(n1,x1,y1,ex1,ey1);
+
+   return result;
 }
 
 TGraphErrors* divideGraphs(TGraphErrors *gr1, TGraphErrors *gr2)
@@ -545,6 +578,12 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
    galice_stat->SetMarkerSize(1.2);
    galice_syst->SetMarkerSize(1.2);
 
+   if (statsyst)
+   {
+      gexp_syst1 = addErrors(gexp_syst1, gexp_stat1);
+      if (twochan) gexp_syst2 = addErrors(gexp_syst2, gexp_stat2);
+   }
+
    gth_cteq->SetLineColor(gColorCT10);
    gth_cteq->SetMarkerSize(0);
    gth_cteq->SetLineWidth(2);
@@ -689,7 +728,7 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       // if (string(gbasename)=="gyieldsp") txl = 0.4;
       TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
       tp->AddText("Luminosity uncertainty: 3.5%");
-      tp->AddText("p_{T}^{l} > 25 GeV/c");
+      tp->AddText("p_{T}^{#font[12]{l}} > 25 GeV/c");
       tp->SetFillColor(kWhite);
       tp->SetBorderSize(0);
       tp->SetTextFont(42);
@@ -996,6 +1035,16 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
    galice_stat->SetMarkerSize(1.2);
    galice_syst->SetMarkerSize(1.2);
 
+   if (statsyst)
+   {
+      gexp_syst1 = addErrors(gexp_syst1, gexp_stat1);
+      if (twochan) 
+      {
+         gexp_syst2 = addErrors(gexp_syst2, gexp_stat2);
+         gexp_syst3 = addErrors(gexp_syst3, gexp_stat3);
+      }
+   }
+
    gth_cteq->SetLineColor(gColorCT10);
    gth_cteq->SetMarkerSize(0);
    gth_cteq->SetLineWidth(2);
@@ -1148,7 +1197,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       // if (string(gbasename)=="gyieldsp") txl = 0.4;
       TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
       tp->AddText("Luminosity uncertainty: 3.5%");
-      tp->AddText("p_{T}^{l} > 25 GeV/c");
+      tp->AddText("p_{T}^{#font[12]{l}} > 25 GeV/c");
       tp->SetFillColor(kWhite);
       tp->SetBorderSize(0);
       tp->SetTextFont(42);
