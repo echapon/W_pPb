@@ -29,7 +29,7 @@ CMS_lumi( TPad* pad, int iPeriod, int iPosX )
 
   pad->cd();
 
-  TString lumiText;
+  TString lumiText, lumiText2;
   if( iPeriod==1 )
     {
       lumiText += lumi_7TeV;
@@ -73,7 +73,8 @@ CMS_lumi( TPad* pad, int iPeriod, int iPosX )
   else if ( iPeriod==99 )
     {
       lumiText += lumi_5TeV;
-      lumiText += " (#sqrt{s_{NN}} = 5.02 TeV)";
+      // lumiText += " (#sqrt{s_{NN}} = 5.02 TeV)";
+      lumiText2 += " #sqrt{s_{NN}} = 5.02 TeV";
     }
    
   cout << lumiText << endl;
@@ -88,7 +89,9 @@ CMS_lumi( TPad* pad, int iPeriod, int iPosX )
   latex.SetTextFont(42);
   latex.SetTextAlign(31); 
   latex.SetTextSize(lumiTextSize*t);    
-  latex.DrawLatex(1-r,1-t+lumiTextOffset*t,lumiText);
+  latex.DrawLatex(1-r,1-t+lumiTextOffset*t,lumiText2);
+  latex.SetTextAlign(11); 
+  latex.DrawLatex(l,1-t+lumiTextOffset*t,lumiText);
 
   if( outOfFrame )
     {
