@@ -676,17 +676,17 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       galice_stat->Draw("PZ");
    }
 
-   double xl=0.4,yl=0.18,dx=0.3,dy=0.15;
+   double xl=0.6,yl=0.15,dx=0.3,dy=0.15;
    if (string(gbasename)=="gA1m" || string(gbasename)=="gA1p" || string(gbasename)=="gA3" || string(gbasename)=="gA4")
    {
       xl=0.21;
-      yl=0.62;
+      yl=0.42;
    }
-   if (string(gbasename)=="gyieldsm") xl=0.3;
    if (twopads) {yl=0.1; dy*=1./0.7;}
-   if (string(gbasename)=="gA1m") xl=0.5;
    if (string(gbasename)=="gA3") yl=0.45;
-   if ((string(gbasename)=="gch"||string(gbasename)=="gyieldsp")&&!reverteta) xl = 0.2;
+   if (string(gbasename)=="gA1m") yl=0.15;
+   if ((string(gbasename)=="gch"||string(gbasename)=="gyieldsp"||string(gbasename)=="gyieldsm")&&!reverteta) xl = 0.11;
+   // if (string(gbasename)=="gch") yl = -0.35;
    // double shiftx = dx/2.;
 
    TLegend *tleg2 = new TLegend(xl,yl,xl+dx,yl+dy);
@@ -723,41 +723,46 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
 
    if (string(gbasename)=="gyieldsp" || string(gbasename)=="gyieldsm")
    {
-      double txl=-1.8, tyl=115., tdx=2., tdy=20.;
+      double txl=-2.35, tyl=125., tdx=2., tdy=15.;
       if (!reverteta) txl = 0.3;
       // if (string(gbasename)=="gyieldsp") txl = 0.4;
       TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
       tp->AddText("Luminosity uncertainty: 3.5%");
-      tp->AddText("p_{T}^{#font[12]{l}} > 25 GeV/c");
       tp->SetFillColor(kWhite);
       tp->SetBorderSize(0);
       tp->SetTextFont(42);
       tp->SetTextSize(lTextSize*0.8);
       tp->SetFillStyle(0);
-      tp->Draw();
-   }
-
-   if (string(gbasename)=="gyieldsp" || string(gbasename)=="gyieldsm" || string(gbasename)=="gA1p" || string(gbasename)=="gA1m" || string(gbasename)=="gA3")
-   {
-      double txl=0.38, tyl=60, tdx=1.,tdy=20.;
-      if (string(gbasename)=="gyieldsm") tyl=95;
-      if (!reverteta) txl = -1.8;
-      if (string(gbasename)=="gA1p") {txl = 0.38; tdx = 0.5; tyl = 1.75; tdy = 0.2;}
-      if (string(gbasename)=="gA1m") {txl = 0.25; tdx = 0.5; tyl = 1.2; tdy = 0.1;}
-      if (string(gbasename)=="gA3") {txl = 0.25; tdx = 0.5; tyl = 1.5; tdy = 0.1;}
-      TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
-      string legend;
-      if (string(gbasename)=="gyieldsp" || string(gbasename)=="gA1p") legend = string(channeltext_p);
-      else if (string(gbasename)=="gyieldsm" || string(gbasename)=="gA1m") legend = string(channeltext_m);
-      else legend = string(channeltext);
-      tp->AddText(legend.c_str());
-      tp->SetFillColor(kWhite);
-      tp->SetBorderSize(0);
-      tp->SetTextFont(42);
-      tp->SetTextSize(lTextSize);
       tp->SetTextAlign(13);
       tp->Draw();
    }
+
+   double txl=0.2, tyl=0.8, txh=0.5, tyh=tyl+0.1;
+   if (string(gbasename)=="gch") {txl=tleg2->GetX1(); tyl=0.4; txh=txl+0.3; tyh=tyl+0.1;}
+   if (string(gbasename)=="gyieldsp" || string(gbasename)=="gyieldsm") {txl=0.27; tyl=tleg2->GetY1()+0.1; tyh=tyl+0.1/0.7;}
+   // if (string(gbasename)=="gyieldsm") tyl=95;
+   // if (!reverteta) txl = -1.8;
+   // if (string(gbasename)=="gA1p") {txl = 0.38; tdx = 0.5; tyl = 1.75; tdy = 0.2;}
+   // if (string(gbasename)=="gA1m") {txl = 0.25; tdx = 0.5; tyl = 1.2; tdy = 0.1;}
+   // if (string(gbasename)=="gA3") {txl = 0.25; tdx = 0.5; tyl = 1.5; tdy = 0.1;}
+   // if (string(gbasename)=="gch") {txl = 0.11; tdx = 0.5; tyl = -0.12; tdy = 0.1;}
+   // if (twopads) {tyl*=1./0.9; tyh*=1./0.8;}
+   TPaveText *tp = new TPaveText(txl,tyl,txh,tyh,"NDC");
+   string legend;
+   if (string(gbasename)=="gyieldsp" || string(gbasename)=="gA1p") legend = string(channeltext_p);
+   else if (string(gbasename)=="gyieldsm" || string(gbasename)=="gA1m") legend = string(channeltext_m);
+   else legend = string(channeltext);
+   tp->AddText(legend.c_str());
+   tp->AddText("p_{T}^{#font[12]{l}} > 25 GeV/c");
+   tp->SetFillColor(kWhite);
+   tp->SetFillStyle(0);
+   tp->SetBorderSize(0);
+   tp->SetTextFont(42);
+   tp->SetTextSize(lTextSize*0.8);
+   tp->SetTextAlign(13);
+   tp->SetX1NDC(tleg2->GetX1NDC());
+   cout << (double) tp->GetX1NDC() << " " << (double) tleg2->GetX1NDC() << endl;
+   tp->Draw();
 
 
    if (twopads)
@@ -776,7 +781,7 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       pad2->cd();
       TH1F *haxis = new TH1F(*(gth_cteq->GetHistogram()));
       haxis->GetYaxis()->SetRangeUser(0.75,1.35);
-      haxis->GetYaxis()->SetTitle("Ratio to CT10");
+      haxis->GetYaxis()->SetTitle("Ratio ");
       haxis->GetXaxis()->SetTitle("#eta_{lab}");
       haxis->GetXaxis()->SetTitleSize(lTextSize);
       haxis->GetXaxis()->SetLabelSize(lTextSize);
@@ -1192,12 +1197,11 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
 
    if (string(gbasename)=="gyieldsp" || string(gbasename)=="gyieldsm")
    {
-      double txl=-1.8, tyl=115., tdx=2., tdy=20.;
+      double txl=-1.76, tyl=119., tdx=2., tdy=20.;
       if (!reverteta) txl = 0.3;
       // if (string(gbasename)=="gyieldsp") txl = 0.4;
       TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
       tp->AddText("Luminosity uncertainty: 3.5%");
-      tp->AddText("p_{T}^{#font[12]{l}} > 25 GeV/c");
       tp->SetFillColor(kWhite);
       tp->SetBorderSize(0);
       tp->SetTextFont(42);
@@ -1206,27 +1210,25 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       tp->Draw();
    }
 
-   if (string(gbasename)=="gyieldsp" || string(gbasename)=="gyieldsm" || string(gbasename)=="gA1p" || string(gbasename)=="gA1m" || string(gbasename)=="gA3")
-   {
-      double txl=0.38, tyl=60, tdx=1.,tdy=20.;
-      if (string(gbasename)=="gyieldsm") tyl=95;
-      if (!reverteta) txl = -1.8;
-      if (string(gbasename)=="gA1p") {txl = 0.38; tdx = 0.5; tyl = 1.75; tdy = 0.2;}
-      if (string(gbasename)=="gA1m") {txl = 0.25; tdx = 0.5; tyl = 1.2; tdy = 0.1;}
-      if (string(gbasename)=="gA3") {txl = 0.25; tdx = 0.5; tyl = 1.5; tdy = 0.1;}
-      TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
-      string legend;
-      if (string(gbasename)=="gyieldsp" || string(gbasename)=="gA1p") legend = string(channeltext_p);
-      else if (string(gbasename)=="gyieldsm" || string(gbasename)=="gA1m") legend = string(channeltext_m);
-      else legend = string(channeltext);
-      tp->AddText(legend.c_str());
-      tp->SetFillColor(kWhite);
-      tp->SetBorderSize(0);
-      tp->SetTextFont(42);
-      tp->SetTextSize(lTextSize);
-      tp->SetTextAlign(13);
-      tp->Draw();
-   }
+   double txl=0.38, tyl=60, tdx=1.,tdy=20.;
+   if (string(gbasename)=="gyieldsm") tyl=95;
+   if (!reverteta) txl = -1.8;
+   if (string(gbasename)=="gA1p") {txl = 0.38; tdx = 0.5; tyl = 1.75; tdy = 0.2;}
+   if (string(gbasename)=="gA1m") {txl = 0.25; tdx = 0.5; tyl = 1.2; tdy = 0.1;}
+   if (string(gbasename)=="gA3") {txl = 0.25; tdx = 0.5; tyl = 1.5; tdy = 0.1;}
+   TPaveText *tp = new TPaveText(txl,tyl,txl+tdx,tyl+tdy);
+   string legend;
+   if (string(gbasename)=="gyieldsp" || string(gbasename)=="gA1p") legend = string(channeltext_p);
+   else if (string(gbasename)=="gyieldsm" || string(gbasename)=="gA1m") legend = string(channeltext_m);
+   else legend = string(channeltext);
+   tp->AddText(legend.c_str());
+   tp->AddText("p_{T}^{#font[12]{l}} > 25 GeV/c");
+   tp->SetFillColor(kWhite);
+   tp->SetBorderSize(0);
+   tp->SetTextFont(42);
+   tp->SetTextSize(lTextSize*0.8);
+   tp->SetTextAlign(13);
+   tp->Draw();
 
 
    if (twopads)
@@ -1245,7 +1247,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       pad2->cd();
       TH1F *haxis = new TH1F(*(gth_cteq->GetHistogram()));
       haxis->GetYaxis()->SetRangeUser(0.75,1.35);
-      haxis->GetYaxis()->SetTitle("Ratio to CT10");
+      haxis->GetYaxis()->SetTitle("Ratio ");
       haxis->GetXaxis()->SetTitle("#eta_{lab}");
       haxis->GetXaxis()->SetTitleSize(lTextSize);
       haxis->GetXaxis()->SetLabelSize(lTextSize);
