@@ -843,10 +843,10 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
    pad1->RedrawAxis();
    pad2->RedrawAxis();
 
-   gPad->SaveAs(Form("%s.pdf",gbasename));
-   gPad->SaveAs(Form("%s.png",gbasename));
-   gPad->SaveAs(Form("%s.root",gbasename));
-   gPad->SaveAs(Form("%s.C",gbasename));
+   c1->SaveAs(Form("%s.pdf",gbasename));
+   c1->SaveAs(Form("%s.png",gbasename));
+   c1->SaveAs(Form("%s.root",gbasename));
+   c1->SaveAs(Form("%s.C",gbasename));
 }
 
 void plot_graph_1file_all(const char* filename, int chan, bool reverse_eta=true, double scale=1./34.62)
@@ -1309,9 +1309,9 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
    c1->cd();
    c1->Update();
 
-   gPad->SaveAs(Form("%s.pdf",gbasename));
-   gPad->SaveAs(Form("%s.png",gbasename));
-   gPad->SaveAs(Form("%s.root",gbasename));
-   gPad->SaveAs(Form("%s.C",gbasename));
+   c1->SaveAs(Form("%s.pdf",gbasename));
+   c1->SaveAs(Form("%s.png",gbasename));
+   c1->SaveAs(Form("%s.root",gbasename));
+   c1->SaveAs(Form("%s.C",gbasename));
 }
 
