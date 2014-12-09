@@ -24,7 +24,7 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
    cout << "\\hline" << endl;
    cout << "$\\frac{d\\sigma}{d\\eta} (\\eta)$ & $[-2.4,-2.0] $ & $[-2.0,-1.5]$& $[-1.5,-1.0]$ & $[-1.0,-0.5]$ & $[-0.5,0]$\\\\" << endl;
    cout << "\\hline" << endl;
-   cout << "$\\mu^-$";
+   cout << "$\\Pgm^-$";
    for (int i=NBINS-1; i>NBINS/2-1; i--)
       cout << " & $" << g1_syst->GetY()[i]/34.62 << "\\pm" << g1_stat->GetEY()[i]/34.62 << "\\pm" << g1_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
@@ -37,11 +37,11 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
       cout << " & $" << gc_syst->GetY()[i]/34.62 << "\\pm" << gc_stat->GetEY()[i]/34.62 << "\\pm" << gc_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
    cout << "\\hline" << endl;
-   cout << "$l^-$ EPS09";
+   cout << "$CT10+EPS09";
    for (int i=NBINS-1; i>NBINS/2-1; i--)
       cout << " & $" << gnuc->GetY()[i]/34.62 << "^{+" << gnuc->GetEYhigh()[i]/34.62 << "}_{-" << gnuc->GetEYlow()[i]/34.62 << "}$";
    cout << "\\\\" << endl;
-   cout << "$l^-$ CT10";
+   cout << "$CT10";
    for (int i=NBINS-1; i>NBINS/2-1; i--)
       cout << " & $" << gnonuc->GetY()[i]/34.62 << "^{+" << gnonuc->GetEYhigh()[i]/34.62 << "}_{-" << gnonuc->GetEYlow()[i]/34.62 << "}$";
    cout << "\\\\" << endl;
@@ -49,7 +49,7 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
    cout << "\\hline" << endl;
    cout << "\\hline" << endl;
    cout << "$\\frac{d\\sigma}{d\\eta} (\\eta)$ &$[0,0.5]$ & $[0.5,1.0]$ & $[1.0,1.5]$ & $[1.5,2.0]$& $[2.0,2.4]$ \\\\" << endl;
-   cout << "$\\mu^-$";
+   cout << "$\\Pgm^-$";
    for (int i=NBINS/2-1; i>=0; i--)
       cout << " & $" << g1_syst->GetY()[i]/34.62 << "\\pm" << g1_stat->GetEY()[i]/34.62 << "\\pm" << g1_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
@@ -62,12 +62,11 @@ void print_combo(const char *file_split, const char* file_combo, const char* gba
       cout << " & $" << gc_syst->GetY()[i]/34.62 << "\\pm" << gc_stat->GetEY()[i]/34.62 << "\\pm" << gc_syst->GetEY()[i]/34.62 << "$";
    cout << "\\\\" << endl;
    cout << "\\hline" << endl;
-   cout << "\\hline" << endl;
-   cout << "$l^-$ EPS09";
+   cout << "$CT10+EPS09";
    for (int i=NBINS/2-1; i>=0; i--)
       cout << " & $" << gnuc->GetY()[i]/34.62 << "^{+" << gnuc->GetEYhigh()[i]/34.62 << "}_{-" << gnuc->GetEYlow()[i]/34.62 << "}$";
    cout << "\\\\" << endl;
-   cout << "$l^-$ CT10";
+   cout << "$CT10";
    for (int i=NBINS/2-1; i>=0; i--)
       cout << " & $" << gnonuc->GetY()[i]/34.62 << "^{+" << gnonuc->GetEYhigh()[i]/34.62 << "}_{-" << gnonuc->GetEYlow()[i]/34.62 << "}$";
    cout << "\\\\" << endl;
