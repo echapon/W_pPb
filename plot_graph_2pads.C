@@ -441,7 +441,7 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       pad2->SetFillStyle(0);
       pad2->SetBottomMargin(gStyle->GetPadBottomMargin()/0.3);
       pad1->SetTopMargin(gStyle->GetPadTopMargin()/0.7);
-      pad2->SetGridy();
+      // pad2->SetGridy();
       pad1->Draw();
       pad1->cd();
 
@@ -890,7 +890,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       pad2->SetFillStyle(0);
       pad2->SetBottomMargin(gStyle->GetPadBottomMargin()/0.3);
       pad1->SetTopMargin(gStyle->GetPadTopMargin()/0.7);
-      pad2->SetGridy();
+      // pad2->SetGridy();
       pad1->Draw();
       pad1->cd();
 
