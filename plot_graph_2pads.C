@@ -38,19 +38,19 @@ float gTextSize = 0.05;
 
 const char *channeltext = "W #rightarrow #font[12]{l} + #nu";
 const char *channeltext_p = "W^{+} #rightarrow #font[12]{l}^{+} + #nu";
-const char *channeltext_m = "W^{-} #rightarrow #font[12]{l}^{-} + #nu";
+const char *channeltext_m = "W^{#font[122]{-}} #rightarrow #font[12]{l}^{#font[122]{-}} + #nu";
 // const char *channeltext = "W #rightarrow e + #nu";
 // const char *channeltext_p = "w^{+} #rightarrow e^{+} + #nu";
 // const char *channeltext_m = "w^{-} #rightarrow e^{-} + #nu";
 const char *channeltext1 = "W #rightarrow #mu + #nu";
 const char *channeltext1_p = "W^{+} #rightarrow #mu^{+} + #nu";
-const char *channeltext1_m = "W^{-} #rightarrow #mu^{-} + #nu";
+const char *channeltext1_m = "W^{#font[122]{-}} #rightarrow #mu^{#font[122]{-}} + #nu";
 // const char *channeltext1 = "W #rightarrow  + #font[12]{l}#nu (new)";
 // const char *channeltext1_p = "W^{+} #rightarrow #font[12]{l}^{+} + #nu (new)";
 // const char *channeltext1_m = "W^{-} #rightarrow #font[12]{l}^{-} + #nu (new)";
 const char *channeltext2 = "W #rightarrow e + #nu";
 const char *channeltext2_p = "W^{+} #rightarrow e^{+} + #nu";
-const char *channeltext2_m = "W^{-} #rightarrow e^{-} + #nu";
+const char *channeltext2_m = "W^{#font[122]{-}} #rightarrow e^{#font[122]{-}} + #nu";
 // const char *channeltext2 = "W #rightarrow  + #font[12]{l}#nu (old)";
 // const char *channeltext2_p = "W^{+} #rightarrow #font[12]{l}^{+} + #nu (old)";
 // const char *channeltext2_m = "W^{-} #rightarrow #font[12]{l}^{-} + #nu (old)";
@@ -478,31 +478,31 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       ymin = 0.;
       ymax = 140.;
       if (string(gbasename)=="gyieldsp") ylabel = string("d#sigma (W^{+}#rightarrow#font[12]{l}^{+}#nu) / d#eta_{lab} [nb]");
-      else ylabel = string("d#sigma (W^{-}#rightarrow#font[12]{l}^{-}#nu) / d#eta_{lab} [nb]");
+      else ylabel = string("d#sigma (W^{#font[122]{-}}#rightarrow#font[12]{l}^{#font[122]{-}}#nu) / d#eta_{lab} [nb]");
    }
    else if (string(gbasename)=="gch")
    {
       ymin = -0.4;
       ymax = 0.4;
-      ylabel = string("(N^{+}-N^{-})/(N^{+}+N^{-})");
+      ylabel = string("(N_{#font[12]{l}}^{+}#font[122]{-}N_{#font[12]{l}}^{#font[122]{-}})/(N_{#font[12]{l}}^{+}+N_{#font[12]{l}}^{#font[122]{-}})");
    }
    else if (string(gbasename)=="gA1m")
    {
       ymin = 0.6;
       ymax = 1.4;
-      ylabel = string("N^{-}(+#eta_{lab})/N^{-}(-#eta_{lab})");
+      ylabel = string("N_{#font[12]{l}}^{#font[122]{-}}(+#eta_{lab})/N_{#font[12]{l}}^{#font[122]{-}}(#font[122]{-}#eta_{lab})");
    }
    else if (string(gbasename)=="gA1p")
    {
       ymin = 0.8;
       ymax = 3.2;
-      ylabel = string("N^{+}(+#eta_{lab})/N^{+}(-#eta_{lab})");
+      ylabel = string("N_{#font[12]{l}}^{+}(+#eta_{lab})/N_{#font[12]{l}}^{+}(#font[122]{-}#eta_{lab})");
    }
    else if (string(gbasename)=="gA3")
    {
       ymin = 0.8;
       ymax = (!twochan && channel_number==1) ? 1.8 : 1.9;
-      ylabel = string("N(+#eta_{lab})/N(-#eta_{lab})");
+      ylabel = string("N_{#font[12]{l}}(+#eta_{lab})/N_{#font[12]{l}}(#font[122]{-}#eta_{lab})");
    }
    else if (string(gbasename)=="gA4")
    {
@@ -609,10 +609,10 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
    gth_cteq2->Draw("Z");
 
    gth_eps->SetLineColor(gColorEPS09);
-   gth_eps->SetLineStyle(9);
+   gth_eps->SetLineStyle(7);
    gth_eps->SetLineWidth(2);
    gth_eps->SetFillColor(gColorEPS09);
-   gth_eps->SetFillStyle(3345);
+   gth_eps->SetFillStyle(3275);
    // gth_eps->Draw("L3");
    gth_eps->Draw("2");
    TGraphAsymmErrors *gth_eps2 = new TGraphAsymmErrors(*gth_eps);
@@ -822,10 +822,10 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       TGraphErrors *gratio_eps = divideGraphs(convert(gth_eps_noct10err), convert(gth_cteq));
       for (int i=0; i<gratio_eps->GetN(); i++) cout << gratio_eps->GetX()[i] << " " << gratio_eps->GetY()[i] << "+-" << gratio_eps->GetEY()[i] << endl;
       gratio_eps->SetLineColor(gColorEPS09);
-      gratio_eps->SetLineStyle(9);
+      gratio_eps->SetLineStyle(7);
       gratio_eps->SetLineWidth(2);
       gratio_eps->SetFillColor(gColorEPS09);
-      gratio_eps->SetFillStyle(3345);
+      gratio_eps->SetFillStyle(3275);
       gratio_eps->Draw("2");
 
       TGraphErrors *gratio_eps2 = new TGraphErrors(*gratio_eps);
@@ -928,31 +928,31 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       ymin = 0.;
       ymax = 140.;
       if (string(gbasename)=="gyieldsp") ylabel = string("d#sigma (W^{+}#rightarrow#font[12]{l}^{+}#nu) / d#eta_{lab} [nb]");
-      else ylabel = string("d#sigma (W^{-}#rightarrow#font[12]{l}^{-}#nu) / d#eta_{lab} [nb]");
+      else ylabel = string("d#sigma (W^{#font[122]{-}}#rightarrow#font[12]{l}^{#font[122]{-}}#nu) / d#eta_{lab} [nb]");
    }
    else if (string(gbasename)=="gch")
    {
       ymin = -0.4;
       ymax = 0.4;
-      ylabel = string("(N^{+}-N^{-})/(N^{+}+N^{-})");
+      ylabel = string("(N_{#font[12]{l}}^{+}#font[122]{-}N_{#font[12]{l}}^{#font[122]{-}})/(N_{#font[12]{l}}^{+}+N_{#font[12]{l}}^{#font[122]{-}})");
    }
    else if (string(gbasename)=="gA1m")
    {
       ymin = 0.6;
       ymax = 1.4;
-      ylabel = string("N^{-}(+#eta_{lab})/N^{-}(-#eta_{lab})");
+      ylabel = string("N_{#font[12]{l}}^{#font[122]{-}}(+#eta_{lab})/N_{#font[12]{l}}^{#font[122]{-}}(#font[122]{-}#eta_{lab})");
    }
    else if (string(gbasename)=="gA1p")
    {
       ymin = 0.8;
       ymax = 3.2;
-      ylabel = string("N^{+}(+#eta_{lab})/N^{+}(-#eta_{lab})");
+      ylabel = string("N_{#font[12]{l}}^{+}(+#eta_{lab})/N_{#font[12]{l}}^{+}(#font[122]{-}#eta_{lab})");
    }
    else if (string(gbasename)=="gA3")
    {
       ymin = 0.8;
       ymax = (!twochan && channel_number==1) ? 1.8 : 1.9;
-      ylabel = string("N(+#eta_{lab})/N(-#eta_{lab})");
+      ylabel = string("N_{#font[12]{l}}(+#eta_{lab})/N_{#font[12]{l}}(#font[122]{-}#eta_{lab})");
    }
    else if (string(gbasename)=="gA4")
    {
@@ -1074,10 +1074,10 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
    gth_cteq2->Draw("Z");
 
    gth_eps->SetLineColor(gColorEPS09);
-   gth_eps->SetLineStyle(9);
+   gth_eps->SetLineStyle(7);
    gth_eps->SetLineWidth(2);
    gth_eps->SetFillColor(gColorEPS09);
-   gth_eps->SetFillStyle(3345);
+   gth_eps->SetFillStyle(3275);
    // gth_eps->Draw("L3");
    gth_eps->Draw("2");
    TGraphAsymmErrors *gth_eps2 = new TGraphAsymmErrors(*gth_eps);
@@ -1288,10 +1288,10 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       TGraphErrors *gratio_eps = divideGraphs(convert(gth_eps_noct10err), convert(gth_cteq));
       for (int i=0; i<gratio_eps->GetN(); i++) cout << gratio_eps->GetX()[i] << " " << gratio_eps->GetY()[i] << "+-" << gratio_eps->GetEY()[i] << endl;
       gratio_eps->SetLineColor(gColorEPS09);
-      gratio_eps->SetLineStyle(9);
+      gratio_eps->SetLineStyle(7);
       gratio_eps->SetLineWidth(2);
       gratio_eps->SetFillColor(gColorEPS09);
-      gratio_eps->SetFillStyle(3345);
+      gratio_eps->SetFillStyle(3275);
       gratio_eps->Draw("2");
 
       TGraphErrors *gratio_eps2 = new TGraphErrors(*gratio_eps);
