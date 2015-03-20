@@ -586,7 +586,7 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
 
    gth_cteq->SetLineColor(gColorCT10);
    gth_cteq->SetMarkerSize(0);
-   gth_cteq->SetLineWidth(2);
+   gth_cteq->SetLineWidth(4);
    gth_cteq->SetFillColor(gColorCT10_fill);
    // gth_cteq->SetFillStyle(3002);
    gth_cteq->SetFillStyle(1001);
@@ -610,9 +610,9 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
 
    gth_eps->SetLineColor(gColorEPS09);
    gth_eps->SetLineStyle(7);
-   gth_eps->SetLineWidth(2);
+   gth_eps->SetLineWidth(4);
    gth_eps->SetFillColor(gColorEPS09);
-   gth_eps->SetFillStyle(3275);
+   gth_eps->SetFillStyle(3375);
    // gth_eps->Draw("L3");
    gth_eps->Draw("2");
    TGraphAsymmErrors *gth_eps2 = new TGraphAsymmErrors(*gth_eps);
@@ -807,7 +807,7 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       setErrorX(gratio_stat,0);
       gratio_ct10err->SetLineColor(gColorCT10);
       gratio_ct10err->SetMarkerSize(0);
-      gratio_ct10err->SetLineWidth(2);
+      gratio_ct10err->SetLineWidth(4);
       gratio_ct10err->SetFillColor(gColorCT10_fill);
       gratio_ct10err->SetFillStyle(1001);
       gratio_ct10err->Draw("2");
@@ -823,9 +823,9 @@ void plot_graph_1file(const char* fname="graph.root", const char *gbasename="gyi
       for (int i=0; i<gratio_eps->GetN(); i++) cout << gratio_eps->GetX()[i] << " " << gratio_eps->GetY()[i] << "+-" << gratio_eps->GetEY()[i] << endl;
       gratio_eps->SetLineColor(gColorEPS09);
       gratio_eps->SetLineStyle(7);
-      gratio_eps->SetLineWidth(2);
+      gratio_eps->SetLineWidth(4);
       gratio_eps->SetFillColor(gColorEPS09);
-      gratio_eps->SetFillStyle(3275);
+      gratio_eps->SetFillStyle(3375);
       gratio_eps->Draw("2");
 
       TGraphErrors *gratio_eps2 = new TGraphErrors(*gratio_eps);
@@ -1052,7 +1052,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
 
    gth_cteq->SetLineColor(gColorCT10);
    gth_cteq->SetMarkerSize(0);
-   gth_cteq->SetLineWidth(2);
+   gth_cteq->SetLineWidth(4);
    gth_cteq->SetFillColor(gColorCT10_fill);
    // gth_cteq->SetFillStyle(3002);
    gth_cteq->SetFillStyle(1001);
@@ -1075,9 +1075,9 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
 
    gth_eps->SetLineColor(gColorEPS09);
    gth_eps->SetLineStyle(7);
-   gth_eps->SetLineWidth(2);
+   gth_eps->SetLineWidth(4);
    gth_eps->SetFillColor(gColorEPS09);
-   gth_eps->SetFillStyle(3275);
+   gth_eps->SetFillStyle(3375);
    // gth_eps->Draw("L3");
    gth_eps->Draw("2");
    TGraphAsymmErrors *gth_eps2 = new TGraphAsymmErrors(*gth_eps);
@@ -1273,7 +1273,7 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       setErrorX(gratio_stat,0);
       gratio_ct10err->SetLineColor(gColorCT10);
       gratio_ct10err->SetMarkerSize(0);
-      gratio_ct10err->SetLineWidth(2);
+      gratio_ct10err->SetLineWidth(4);
       gratio_ct10err->SetFillColor(gColorCT10_fill);
       gratio_ct10err->SetFillStyle(1001);
       gratio_ct10err->Draw("2");
@@ -1289,9 +1289,9 @@ void plot_graph_2file(const char* fname1="graph.root", const char* fname2="graph
       for (int i=0; i<gratio_eps->GetN(); i++) cout << gratio_eps->GetX()[i] << " " << gratio_eps->GetY()[i] << "+-" << gratio_eps->GetEY()[i] << endl;
       gratio_eps->SetLineColor(gColorEPS09);
       gratio_eps->SetLineStyle(7);
-      gratio_eps->SetLineWidth(2);
+      gratio_eps->SetLineWidth(4);
       gratio_eps->SetFillColor(gColorEPS09);
-      gratio_eps->SetFillStyle(3275);
+      gratio_eps->SetFillStyle(3375);
       gratio_eps->Draw("2");
 
       TGraphErrors *gratio_eps2 = new TGraphErrors(*gratio_eps);
